@@ -1,6 +1,6 @@
 from gadvpn.domain.common.entities import Entity, AggregateRoot
-from gadvpn.domain.user.value_objects import UserID, FullName
-from gadvpn.domain.user.events import UserCreated, FullNameUpdated
+from gadvpn.domain.users.value_objects import UserID, FullName
+from gadvpn.domain.users.events import UserCreated, FullNameUpdated
 
 
 class User(Entity, AggregateRoot):
