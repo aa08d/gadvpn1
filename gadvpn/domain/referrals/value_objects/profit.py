@@ -11,8 +11,8 @@ class Profit(ValueObject):
     def create(cls) -> "Profit":
         return cls(Decimal(0))
 
-    def add(self, amount: Decimal) -> None:
-        self._profit = self._profit + amount
+    def add(self, profit: "Profit") -> None:
+        self._profit = self._profit + profit.value
 
     @property
     def value(self) -> Decimal:
