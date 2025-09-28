@@ -2,8 +2,10 @@ from abc import ABC
 
 from gadvpn.domain.common.events import Event
 
+from .entity import Entity
 
-class AggregateRoot(ABC):
+
+class AggregateRoot(Entity, ABC):
     def __init__(self) -> None:
         self._events: list[Event] = []
 

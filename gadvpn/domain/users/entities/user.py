@@ -1,9 +1,9 @@
-from gadvpn.domain.common.entities import Entity, AggregateRoot
+from gadvpn.domain.common.entities import AggregateRoot
 from gadvpn.domain.users.value_objects import UserID, FullName
 from gadvpn.domain.users.events import UserCreated, FullNameUpdated
 
 
-class User(Entity, AggregateRoot):
+class User(AggregateRoot):
     def __init__(self, user_id: UserID, full_name: FullName) -> None:
         super().__init__()
         self.user_id = user_id
