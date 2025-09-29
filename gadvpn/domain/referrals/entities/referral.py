@@ -2,9 +2,6 @@ from gadvpn.domain.common.entities import AggregateRoot
 from gadvpn.domain.referrals.value_objects import ReferralID, Profit, FromUser, ReferredAt
 from gadvpn.domain.referrals.events import ReferralCreated, ProfitUpdated
 
-from uuid6 import uuid7
-from decimal import Decimal
-
 
 class Referral(AggregateRoot):
     def __init__(
