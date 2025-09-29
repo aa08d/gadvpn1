@@ -33,13 +33,13 @@ class Referral(AggregateRoot):
                 referral_id=referral.referral_id.value,
                 profit=referral.profit.value,
                 from_user=referral.from_user.value,
-                referred_at=referral.from_user.value,
+                referred_at=referral.referred_at.value,
             )
         )
         return referral
 
     def add_profit(self, profit: Profit) -> None:
-        self.profit.add(profit)
+        self.profit = self.profit.add(profit)
         self._record_event(
             ProfitUpdated(
                 referral_id=self.referral_id.value,
