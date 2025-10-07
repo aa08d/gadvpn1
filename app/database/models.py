@@ -57,7 +57,7 @@ class TelegramAccount(Base):
     __tablename__ = "telegrams"
 
     id = Column(BigInteger, primary_key=True, unique=True)
-    username = Column(String(32))
+    username = Column(String(32), nullable=True)
 
     user = relationship("User", back_populates="telegram")
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))

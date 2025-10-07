@@ -28,7 +28,7 @@ class VPNClient:
     def __init__(self, config: MarzbanConfig) -> None:
         self._config = config
 
-    async def create_user(self, user_id: UUID, username:  str | None, telegram_id: int) -> None:
+    async def create_user(self, user_id: UUID) -> None:
         expire = datetime.timestamp(
             datetime.now(timezone(timedelta(hours=3))) + timedelta(days=10)
         )
@@ -36,9 +36,9 @@ class VPNClient:
             username=str(user_id),
             proxies=proxies,
             expire=int(expire),
-            note=f"Username: {username}; Telegram ID: {telegram_id}"
         )
-        await add_user.asyncio(client=self.client, body=user)
+        client = await self.client()
+        await add_user.asyncio(client=client, body=user)
 
     async def extend_subscription(self, user_id: UUID, days: int) -> None:
         user = await self.get_user(user_id)
@@ -52,19 +52,21 @@ class VPNClient:
                 datetime.fromtimestamp(user.expire) + timedelta(days=days)
             )
 
+        client = await self.client()
         payload = UserModify(expire=int(expire_date))
-        await modify_user.asyncio(user_id, client=self.client, body=payload)
+        await modify_user.asyncio(user_id, client=client, body=payload)
 
     async def get_user(self, user_id: UUID) -> UserResponse:
-        user = await get_user.asyncio(str(user_id), client=self.client)
+        client = await self.client()
+        user = await get_user.asyncio(str(user_id), client=client)
         return user
 
     async def get_users(self) -> list[UserResponse]:
-        users = await get_users.asyncio(client=self.client)
+        client = await self.client()
+        users = await get_users.asyncio(client=client)
         return users.users
 
-    @property
-    async def client(self) -> None:
+    async def client(self) -> AuthenticatedClient:
         async with Client(base_url=self._config.url) as client:
             login_data = BodyAdminTokenApiAdminTokenPost(
                 username=self._config.username,
