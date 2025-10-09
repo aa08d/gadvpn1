@@ -13,7 +13,7 @@ router = Router()
 
 
 @router.callback_query(ChoiceLanguageCallbackData.filter())
-async def register_user(
+async def register_user_callback(
     callback: CallbackQuery,
     callback_data: ChoiceLanguageCallbackData,
     session: AsyncSession,
@@ -27,8 +27,8 @@ async def register_user(
         language_code=callback_data.language,
     )
     user = await create_telegram_user(command, session)
+    await marzban.create_user(user_id=user.id)
     await callback.message.edit_text(
         text=welcome_message.format(name=user.first_name),
         reply_markup=main_menu_keyboard,
     )
-    await marzban.create_user(user_id=user.id)
