@@ -6,7 +6,7 @@ from aiogram.client.default import DefaultBotProperties
 
 from app.config_loader import load_config
 from app.bot.config import BotConfig
-from app.bot.middlewares import SessionMiddleware, AuthMiddleware
+from app.bot.middlewares import SessionMiddleware
 from app.marzban import init_marzban
 from app.bot.handlers import include_routers
 
@@ -15,10 +15,9 @@ async def main() -> None:
     bot_config = load_config(BotConfig, "bot")
     bot = Bot(bot_config.token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     marzban = init_marzban()
-    dp = Dispatcher(bot=bot, marzban=marzban)
+    dp = Dispatcher(bot=bot, vpn=marzban)
 
     dp.update.middleware(SessionMiddleware())
-    dp.update.middleware(AuthMiddleware())
 
     include_routers(dp)
 

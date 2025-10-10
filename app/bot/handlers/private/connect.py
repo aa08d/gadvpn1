@@ -2,21 +2,21 @@ from aiogram import Router, F
 from aiogram.types import CallbackQuery
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.bot.filters import MenuCallbackData, ChoiceOSCallbackData
-from app.bot.keyboards import os_choice_keyboard, get_connect_keyboard
+from app.bot.filters.callback_data import MenuCallback, ChoiceOSCallback
+from app.bot.keyboards import os_keyboard, get_connect_keyboard
 from app.marzban import VPNClient
 from app.database.queries import get_user_by_telegram
-from app.bot.messages import manual_message
+from app.bot.messages import manual_message, connect_category_message
 
 
 router = Router()
 
 
-@router.callback_query(MenuCallbackData.filter(F.category == "connect"))
+@router.callback_query(MenuCallback.filter(F.category == "connect"))
 async def connect_callback(callback: CallbackQuery) -> None:
     await callback.message.edit_text(
-        text=...,
-        reply_markup=os_choice_keyboard,
+        text=connect_category_message,
+        reply_markup=os_keyboard,
     )
 
 
@@ -29,10 +29,10 @@ download_links = {
 deeplink_template = "https://gadvpn-preview.ru/?target={subscription_url}"
 
 
-@router.callback_query(ChoiceOSCallbackData.filter())
+@router.callback_query(ChoiceOSCallback.filter())
 async def os_chose_callback(
     callback: CallbackQuery,
-    callback_data: ChoiceOSCallbackData,
+    callback_data: ChoiceOSCallback,
     vpn: VPNClient,
     session: AsyncSession,
 ) -> None:

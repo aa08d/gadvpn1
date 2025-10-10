@@ -1,28 +1,28 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from app.bot.filters import ChoiceOSCallbackData
+from app.bot.filters.callback_data import ChoiceOSCallback
 
 
-os_choice_keyboard = InlineKeyboardMarkup(
+os_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(
                 text="🤖 Android",
-                callback_data=ChoiceOSCallbackData(os="android").pack(),
+                callback_data=ChoiceOSCallback(os="android").pack(),
             ),
             InlineKeyboardButton(
                 text="🍎 iOS",
-                callback_data=ChoiceOSCallbackData(os="ios").pack(),
+                callback_data=ChoiceOSCallback(os="ios").pack(),
             ),
         ],
         [
             InlineKeyboardButton(
                 text="🖥️  Windows",
-                callback_data=ChoiceOSCallbackData(os="windows").pack(),
+                callback_data=ChoiceOSCallback(os="windows").pack(),
             ),
             InlineKeyboardButton(
                 text="💻 MacOS",
-                callback_data=ChoiceOSCallbackData(os="mac_os").pack(),
+                callback_data=ChoiceOSCallback(os="mac_os").pack(),
             ),
         ],
     ],

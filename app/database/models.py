@@ -28,6 +28,8 @@ class Referral(Base):
     profit = Column(Numeric(precision=10, scale=2), default=0)
     referred_at = Column(Date, default=lambda: datetime.now(UTC).date())
 
+    user_id = Column(UUID(as_uuid=True))
+
     from_user = relationship("User", back_populates="referrals")
     from_user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
 

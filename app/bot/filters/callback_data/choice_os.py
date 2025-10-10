@@ -1,5 +1,5 @@
 from aiogram.filters.callback_data import CallbackData
 
 
-class ChoiceOSCallbackData(CallbackData, prefix="os"):
+class ChoiceOSCallback(CallbackData, prefix="os"):
     os: str

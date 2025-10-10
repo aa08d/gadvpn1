@@ -14,7 +14,7 @@ yookassa.Configuration.account_id = config.account_id
 yookassa.Configuration.secret_key = config.secret_key
 
 
-def create(amount: int, days: int) -> yookassa.Payment:
+def create_payment(amount: int, days: int) -> yookassa.Payment:
     payment_id = str(uuid7())
     payment = yookassa.Payment.create(
         {

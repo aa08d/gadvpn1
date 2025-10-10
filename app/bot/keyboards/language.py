@@ -1,18 +1,18 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from app.bot.filters import ChoiceLanguageCallbackData
+from app.bot.filters.callback_data import LanguageCallback
 
 
-choice_language_keyboard = InlineKeyboardMarkup(
+language_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(
                 text="🇷🇺 ru",
-                callback_data=ChoiceLanguageCallbackData(language="ru").pack(),
+                callback_data=LanguageCallback(language="ru").pack(),
             ),
             InlineKeyboardButton(
                 text="🇬🇧 en",
-                callback_data=ChoiceLanguageCallbackData(language="en").pack(),
+                callback_data=LanguageCallback(language="en").pack(),
             )
         ]
     ]

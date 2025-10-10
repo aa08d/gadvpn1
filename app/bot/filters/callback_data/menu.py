@@ -1,5 +1,5 @@
 from aiogram.filters.callback_data import CallbackData
 
 
-class MenuCallbackData(CallbackData, prefix="menu"):
+class MenuCallback(CallbackData, prefix="menu"):
     category: str

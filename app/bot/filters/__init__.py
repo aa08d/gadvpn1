@@ -1,10 +1,8 @@
-from .choice_languge_callback_data import ChoiceLanguageCallbackData
-from .menu import MenuCallbackData
-from .os_callback_data import ChoiceOSCallbackData
+from . import callback_data
+from .is_authorized import IsAuthorized
 
 
-__all__ = [
-    "ChoiceLanguageCallbackData",
-    "MenuCallbackData",
-    "ChoiceOSCallbackData",
-]
+__all__ = (
+    "callback_data",
+    "IsAuthorized",
+)
