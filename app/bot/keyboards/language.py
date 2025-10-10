@@ -13,7 +13,7 @@ language_keyboard = InlineKeyboardMarkup(
             InlineKeyboardButton(
                 text="🇬🇧 en",
                 callback_data=LanguageCallback(language="en").pack(),
-            )
-        ]
-    ]
+            ),
+        ],
+    ],
 )
